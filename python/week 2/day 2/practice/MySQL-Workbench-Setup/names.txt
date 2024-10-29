@@ -1,0 +1,4 @@
+INSERT INTO names (name) values ('hamza'),('ghada'),('ali'),('maryem');
+select * from names;
+DELETE FROM names WHERE id = 1;
+
