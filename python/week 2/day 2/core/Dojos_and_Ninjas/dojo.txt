@@ -1,0 +1,18 @@
+select * from dojos ;
+insert into dojos (name) values ('Developer'),('coder'),('engineer');
+delete from dojos where id=1;
+delete from dojos where id=2;
+delete from dojos where id=3;
+insert into dojos (name) values ('Dojo1'),('Dojo2'),('Dojo3') ;
+insert into ninjas (first_name, last_name, age, dojo_id) values ('ninja1','lastname1',25,4) ;
+insert into ninjas (first_name, last_name, age, dojo_id) values ('ninja2','lastname2',21,4) ;
+insert into ninjas (first_name, last_name, age, dojo_id) values ('ninja3','lastname3',22,4) ;
+insert into ninjas (first_name, last_name, age, dojo_id) values ('ninja4','lastname4',19,5),('ninja5','lastname5',22,5),('ninja6','lastname6',30,5) ;
+insert into ninjas (first_name, last_name, age, dojo_id) values ('ninja7','lastname7',19,6),('ninja8','lastname8',22,6),('ninja9','lastname9',30,6) ;
+select* from dojos;
+select * from ninjas where dojo_id=4 ;
+select * from ninjas where dojo_id=6 ;
+select * from dojos where id=6;
+SELECT * from dojos
+JOIN ninjas on dojos_id=dojos.id
+WHERE ninja.id= 6;
