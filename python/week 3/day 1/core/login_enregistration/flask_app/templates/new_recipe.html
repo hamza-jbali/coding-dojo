@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New recipe</title>
+</head>
+<style>
+    *{
+        margin: 0 auto;
+    }
+    .container{
+        width: 800px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .rd1{
+        display: flex;
+    }
+    .rd2{
+        display: flex;
+    }
+    button{
+        height: 30px;
+        width: 80px;
+    }
+    #flash{
+        background-color: rgb(210, 114, 114);
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>Add a new recipe</h1>
+        <p style="color: red;">*Description must not be left BLANK*</p>
+        <form action="/create/recipe" method="POST">
+            <label for="name">Recipe name</label>
+            <input type="text" name="name">
+            {% for message in get_flashed_messages(category_filter=["name_validation"]) %}
+                <div id="flash">
+                    {{message}}         
+                </div>
+                {% endfor %}
+            <label for="description">Recipe description</label>
+            <textarea name="description" id=""></textarea>
+            {% for message in get_flashed_messages(category_filter=["description_validation"]) %}
+                <div id="flash">
+                    {{message}}         
+                </div>
+                {% endfor %}
+            <label for="instructions">Instructions</label>
+            <textarea name="instructions" id=""></textarea>
+            {% for message in get_flashed_messages(category_filter=["insctructions_validation"]) %}
+                <div id="flash">
+                    {{message}}         
+                </div>
+                {% endfor %}
+            <label for="date_made">Date cooked/Mode</label>
+            <input type="date" name="date_made">
+            <label for="under_30_min">Less than 30min preparation ?</label> <br>
+            <div class="rd1">
+                <input type="radio" id="under_30_yes" name="under_30_min" value="1">
+                <label for="under_30_yes">Yes</label><br>
+            </div>
+            <div class="rd2">
+                <input type="radio"  name="under_30_min" value="0">
+                <label for="under_30_no">No</label><br>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <a href="">Back to recipes</a>
+        <a href="/logout">Log out</a>
+    </div>
+</body>
+</html>

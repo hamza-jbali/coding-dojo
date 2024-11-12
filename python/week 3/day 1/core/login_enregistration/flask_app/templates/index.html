@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Share Recipes</title>
 </head>
 <style>
+    *{
+        margin: 0 auto;}
     .container{
+        width: 800px;
         display: flex;
         justify-content: space-evenly;
     }
@@ -15,30 +18,14 @@
         flex-direction: column;
         gap: 10px;
     }
-    #flash{
-        background-color: rgb(240, 117, 117);
-        margin-top: -10px;
-    }
-    .login_flash{
-        background-color: rgb(240, 117, 117);
-    }
-    .registration{
-        background-color: rgb(238, 207, 130);
-        padding: 20px;
-    }
-    .login{
-        background-color:violet;
-        padding: 20px;
-    }
-    input{
-        border-radius: 10px;
-        border: none;
-    }
-    button{
-        border-radius: 10px;
+    body{
+        display: flex;
+        flex-direction: column;
+        gap: 65px;
     }
 </style>
 <body>
+    <h1>RECIPE SHARE</h1>
     <div class="container">
         <div class="registration">
             <form action="/user/registration" method="POST">
@@ -52,7 +39,7 @@
                 {% endfor %}
                 <label for="last_name">Last name</label>
                 <input type="text" name="last_name">
-                {% for message in get_flashed_messages(category_filter=["lastt_name_validation"]) %}
+                {% for message in get_flashed_messages(category_filter=["last_name_validation"]) %}
                 <div id="flash">
                     {{message}}  
                 </div>

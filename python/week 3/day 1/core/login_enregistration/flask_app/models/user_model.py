@@ -17,44 +17,31 @@ class User :
         self.updated_at=data['updated_at']
 
 
-
-    
     @classmethod
-    def save(cls,data):
-        query="INSERT INTO users (first_name,last_name,email,password) VALUES (%(first_name)s,%(last_name)s,%(email)s,%(password)s) ;"
-        results= connectToMySQL(DB).query_db(query,data)
-        return results 
-
-
-    @classmethod
-    def get_by_email(cls,data):
-        query = "SELECT * FROM users WHERE email = %(email)s ;"
+    def create_user(cls,data):
+        query="INSERT INTO users (first_name,last_name,email,password) VALUES (%(first_name)s,%(last_name)s,%(email)s,%(password)s);"
         result=connectToMySQL(DB).query_db(query,data)
-        if result :
-            return cls(result[0])
-        return False
+        return result
+
 
     @classmethod
     def get_one(cls,data):
         query = "SELECT * FROM users WHERE id = %(id)s ;"
         results=connectToMySQL(DB).query_db(query,data)
-        if len(results) <1:
-            return False
-        user = cls(results[0])
+        user = User(results[0])
         return user
-
 
     @staticmethod
     def validate_user(user):
         is_valid = True
-        if len(user['first_name']) < 3:
-            flash("First name must contain at least 3 characters", "first_name_validation")
+        if len(user['first_name']) < 2:
+            flash("First name must contain at least 2 characters", "first_name_validation")
             is_valid = False
-        if len(user['last_name']) < 3:
-            flash("Last name must contain at least 3 characters", "last_name_validation")
+        if len(user['last_name']) < 2:
+            flash("Last name must contain at least 2 characters", "last_name_validation")
             is_valid = False
         if not EMAIL_REGEX.match(user['email']):
-            flash("Invalid email address!", "email_validation")
+            flash("Invalid email address ! Try again . ", "email_validation")
             is_valid = False
         elif User.get_by_email({'email': user['email']}):
             flash("Email already exists", "email_validation")
@@ -66,3 +53,13 @@ class User :
             flash("Passwords must match", "confirm_password_validation")
             is_valid = False
         return is_valid
+
+
+
+    @classmethod
+    def get_by_email(cls,data):
+        query = "SELECT * FROM users WHERE email = %(email)s ;"
+        result=connectToMySQL(DB).query_db(query,data)
+        if result :
+            return cls(result[0])
+        return False
